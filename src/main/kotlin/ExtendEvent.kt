@@ -16,3 +16,13 @@ abstract class FormEventTarget : EventTarget() {
 abstract class InputTextEvent(type: String, eventInitDict: EventInit) : Event(type = type, eventInitDict = eventInitDict) {
     override abstract var target: FormEventTarget
 }
+
+sealed class EventProp<T>(val eventName: String, val handler: (T) -> dynamic) : YakitoriProp<(T) -> dynamic>(name = eventName, value = handler) {
+    class onClick(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onclick", handler = handler)
+    class onInput(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onInput", handler = handler)
+    class onInputText(textHandler: (String) -> dynamic) : EventProp<InputTextEvent>(eventName = "onInput", handler = { event ->
+        textHandler(event.target.value)
+    })
+
+    class onChange(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onChange", handler = handler)
+}

@@ -14,19 +14,7 @@ abstract class YakitoriProp<T>(val name: String, val value: T) {
     class Key(value: String) : YakitoriProp<String>(value = value, name = "key")
 }
 
-abstract class YakitoriStringProp(name: String, value: String) : YakitoriProp<String>(name, value) {
-}
-
-sealed class EventProp<T>(val eventName: String, val handler: (T) -> dynamic) : YakitoriProp<(T) -> dynamic>(name = eventName, value = handler) {
-    class onClick(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onclick", handler = handler)
-    class onInput(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onInput", handler = handler)
-    class onInputText(textHandler: (String) -> dynamic) : EventProp<InputTextEvent>(eventName = "onInput", handler = { event ->
-        textHandler(event.target.value)
-    })
-
-    class onChange(handler: (Event) -> dynamic) : EventProp<Event>(eventName = "onchange", handler = handler)
-}
-
+abstract class YakitoriStringProp(name: String, value: String) : YakitoriProp<String>(name, value)
 
 typealias YakitoriElement = InfernoElement
 

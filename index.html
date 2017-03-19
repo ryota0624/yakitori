@@ -7,6 +7,10 @@
 <body>
     <div id="main"></div>
     <script src="./node_modules/inferno/dist/inferno.js"></script>
+    <script src="./node_modules/inferno-component/dist/inferno-component.js"></script>
+    <script>
+        window["InfernoComponent"] = window["inferno-component"]
+    </script>
     <script src="./build/classes/main/lib/kotlin.js"></script>
     <script src="./build/classes/main/lib/kotlin.meta.js"></script>
     <script src="./build/classes/main/yakitori_main.js"></script>
